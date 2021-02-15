@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity{        //item테이블을 단독 사용할 일 없다고 가정하고, 추상테이블로 만든다
 
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
@@ -17,6 +19,7 @@ public class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
 
     public Long getId() {
         return id;
